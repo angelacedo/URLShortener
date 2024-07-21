@@ -20,8 +20,7 @@ const addUrl = async (urlOriginal: string): Promise<QueryResponse> =>
     const response = await fetch(config.serverUrl + "addUrl", {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*'
+            'Content-Type': 'application/json'
         },
         mode: 'cors',
         body: JSON.stringify({ urlOriginal })
@@ -37,8 +36,7 @@ const getAllUrls = async (abortController: AbortController): Promise<QueryRespon
     const response = await fetch(config.serverUrl + "getAllUrls", {
         method: 'GET',
         headers: {
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*'
+            'Content-Type': 'application/json'
         },
         mode: 'cors',
         signal: abortController.signal
@@ -56,8 +54,7 @@ const deleteUrl = async (shortURL: string): Promise<QueryResponse> =>
     const response = await fetch(config.serverUrl + "deleteUrl", {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*'
+            'Content-Type': 'application/json'
         },
         mode: 'cors',
         body: JSON.stringify({ shortUrl: shortURL })
@@ -75,8 +72,7 @@ const getOriginalUrlFromShortUrl = async (shortURL: string): Promise<QueryRespon
     const response = await fetch(config.serverUrl + "getOriginalUrlFromShortUrl/" + shortURL, {
         method: 'GET',
         headers: {
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*'
+            'Content-Type': 'application/json'
         },
         mode: 'cors'
     }
