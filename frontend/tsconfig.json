@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "target": "es5",                         // Especifica el objetivo de compilación (ES5 es una buena opción para compatibilidad)
+    "module": "commonjs",                    // Especifica el sistema de módulos (CommonJS es adecuado para Node.js)
+    "strict": true,                          // Habilita todas las verificaciones estrictas de TypeScript
+    "esModuleInterop": true,                 // Habilita interoperabilidad con módulos ES
+    "skipLibCheck": true,                    // Omite la verificación de tipos en archivos de declaración
+    "forceConsistentCasingInFileNames": true,// Fuerza el uso consistente de mayúsculas y minúsculas en los nombres de archivos
+    "jsx": "react",                          // Especifica cómo se deben transformar los archivos JSX (react para JSX de React)
+    "moduleResolution": "node",              // Especifica el algoritmo de resolución de módulos
+    "baseUrl": "./src",                      // Establece la base para resolver rutas relativas en los módulos
+    "paths": {
+      "@api/*": ["api/*"]                    // Mapea rutas para módulos
+    },
+    "outDir": "./dist",                      // Directorio de salida para los archivos compilados
+    "allowSyntheticDefaultImports": true     // Permite importar módulos sin declaración de tipo
+  },
+  "include": [
+    "src"                                    // Directorios que deben ser incluidos en la compilación
+  ],
+  "exclude": [
+    "node_modules",                          // Directorios que deben ser excluidos de la compilación
+    "dist"                                   // Excluye el directorio de salida
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "name": "urlshortener",
+  "version": "2.0.0",
+  "description": "A simple URL Shortener",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "keywords": [
+    "url",
+    "shortener"
+  ],
+  "author": "Angel Acedo Moreno",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "mongodb": "^6.8.0",
+    "mongoose": "^8.5.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.4"
+  }
+}

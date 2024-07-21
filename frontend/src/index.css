@@ -1,0 +1,14 @@
+:root {
+  --background-color: #0F3057;
+  --text-color: #FFFFFF;
+  --background-color-table: #f0f8ff;
+  --delete-button-background: #fd4141;
+}
+
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--background-color);
+  font-family: Roboto, Helvetica Neue, sans-serif;
+}
