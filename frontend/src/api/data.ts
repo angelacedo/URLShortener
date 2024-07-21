@@ -21,6 +21,7 @@ const addUrl = async (urlOriginal: string): Promise<QueryResponse> =>
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*'
         },
         mode: 'cors',
         body: JSON.stringify({ urlOriginal })
@@ -37,6 +38,7 @@ const getAllUrls = async (abortController: AbortController): Promise<QueryRespon
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*'
         },
         mode: 'cors',
         signal: abortController.signal
@@ -55,6 +57,7 @@ const deleteUrl = async (shortURL: string): Promise<QueryResponse> =>
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*'
         },
         mode: 'cors',
         body: JSON.stringify({ shortUrl: shortURL })
@@ -73,6 +76,7 @@ const getOriginalUrlFromShortUrl = async (shortURL: string): Promise<QueryRespon
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*'
         },
         mode: 'cors'
     }
