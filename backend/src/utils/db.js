@@ -6,7 +6,7 @@ const connect = async () =>
 {
     try
     {
-        const client = await mongoose.connect(config.URI, {
+        const client = await mongoose.connect(config.MONGODB_URI, {
             serverSelectionTimeoutMS: 5000
         });
         console.log("Successfully connected");
