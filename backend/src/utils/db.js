@@ -57,18 +57,26 @@ const addUrl = async (urlModel) =>
 
 const getOriginalUrlFromShortUrl = async (shortUrl) =>
 {
-    let response;
+    let response, result;
     try
     {
-        const result = await URLModel.findOne({ shortURL: shortUrl });
-        if (!result)
-            throw new Error("Short URL Not found");
+        result = await increaseClickCount(shortUrl);
+        if (result != 1)
+            throw new Error("An error has ocurred updating fields");
         else
-            response = {
-                code: 200,
-                errorMessage: null,
-                data: [result]
-            };
+        {
+            result = await URLModel.findOne({ shortURL: shortUrl });
+            if (!result)
+                throw new Error("Short URL Not found");
+            else
+            {
+                response = {
+                    code: 200,
+                    errorMessage: null,
+                    data: [result]
+                };
+            }
+        }
     } catch (e)
     {
         response = {
@@ -81,6 +89,34 @@ const getOriginalUrlFromShortUrl = async (shortUrl) =>
     return response;
 };
 
+const increaseClickCount = async (shortUrl) =>
+{
+    let response, result;
+
+    try
+    {
+        result = await URLModel.findOne({ shortURL: shortUrl });
+        if (!result)
+            throw new Error("Short URL Not found");
+        else
+        {
+            result.clickCount += 1;
+            result = await URLModel.updateOne({ _id: result._id }, { $set: { clickCount: result.clickCount } });
+        }
+        return result.modifiedCount;
+
+
+    } catch (e)
+    {
+        response = {
+            code: e.message == "Short URL Not found" ? 404 : e.code,
+            errorMessage: "Error searching registry to database: " + e.message,
+            data: []
+        };
+
+    }
+    return response;
+};
 
 
 const deleteUrl = async (shortURL) =>
@@ -122,8 +158,8 @@ const getAllUrls = async () =>
                 errorMessage: null,
                 data: result
             };
-            console.log(response.code)
-            return response;
+        console.log(response.code);
+        return response;
     } catch (e)
     {
         response = {
