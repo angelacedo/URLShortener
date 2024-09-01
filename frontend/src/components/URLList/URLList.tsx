@@ -4,7 +4,7 @@ import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { ClipLoader } from 'react-spinners';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { DataResponse, deleteUrl, getAllUrls, QueryResponse } from '../../api/data';
+import { DataResponse, getAllUrls, QueryResponse } from '../../api/data';
 
 import { IoCopy, IoCopyOutline } from 'react-icons/io5';
 import './URLList.css';
@@ -18,7 +18,7 @@ const URLList: FC<URLListProps> = ({ newUrl }) =>
   const [urls, setUrls] = useState<DataResponse[]>([]);
   const [isFetched, setIsFetched] = useState(false);
   const [isIconClicked, setIconClicked] = useState<number | null>(null);
-  let [color, setColor] = useState("var(--primary-color)");
+  let [color] = useState("var(--primary-color)");
   const [lastPage, setLastPage] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
   const ROWS_PER_PAGE = 3;
@@ -43,7 +43,7 @@ const URLList: FC<URLListProps> = ({ newUrl }) =>
 
   useEffect(() => setLastPage(Math.ceil(urls.length / ROWS_PER_PAGE)), [urls]);
 
-  const onDelete = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) =>
+  /* const onDelete = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) =>
   {
     e.preventDefault();
     const shortURL: string | null = (e.currentTarget.parentElement?.parentElement?.children[2].querySelector('a') as HTMLAnchorElement).href;
@@ -62,7 +62,7 @@ const URLList: FC<URLListProps> = ({ newUrl }) =>
       }
     }
 
-  };
+  }; */
 
   const onCopy = (index: number, url: string) =>
   {
@@ -89,7 +89,7 @@ const URLList: FC<URLListProps> = ({ newUrl }) =>
 
           return (
             <div>
-              {isIconClicked == info.getValue().index ? <IoCopy /> : <IoCopyOutline onClick={() => onCopy(info.getValue().index, info.getValue().shortURL)} />}
+              {isIconClicked === info.getValue().index ? <IoCopy /> : <IoCopyOutline onClick={() => onCopy(info.getValue().index, info.getValue().shortURL)} />}
               <p>{info.getValue().shortURL}</p>
             </div>
           );
@@ -187,7 +187,7 @@ const URLList: FC<URLListProps> = ({ newUrl }) =>
                 })}
               </tr>
             ))
-            : isFetched && urls.length == 0
+            : isFetched && urls.length === 0
               ? (
                 <tr>
                   <td colSpan={4}>
