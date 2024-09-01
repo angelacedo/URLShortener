@@ -62,17 +62,23 @@
     background-color: var(--background-color-button);
 }
 
+.tableContainer .controlButtons button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .tableContainer .controlButtons button svg {
     margin: auto;
-    vertical-align: middle;
     font-size: 10px;
 }
 
-.tableContainer div select{
+.tableContainer div select {
     margin-bottom: 10px;
 }
 
-.tableContainer div select, .tableContainer div select option{
+.tableContainer div select,
+.tableContainer div select option {
     padding: 3px;
     border-radius: 5px;
     background-color: var(--primary-color);
@@ -80,13 +86,13 @@
 }
 
 
-.tableContainer div select:focus{
+.tableContainer div select:focus {
     outline: none;
 }
 
 .tableContainer div select option:checked {
-  background-color: transparent;
-  color: inherit;
+    background-color: transparent;
+    color: inherit;
 }
 
 
