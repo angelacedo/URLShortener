@@ -1,0 +1,14 @@
+.TopMenu {
+    padding: 30px;
+}
+
+.TopMenu span {
+    font-size: 1em;
+    text-align: center;
+    background: var(--title-color);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    font-weight: bold;
+}

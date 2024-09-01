@@ -11,8 +11,9 @@ interface DataResponse
     _id: string;
     originalURL: string,
     shortURL: string,
-    date: Date;
-    deletedCount: number;
+    clickCount: 0,
+    date: Date,
+    deletedCount: number
 }
 
 const addUrl = async (urlOriginal: string): Promise<QueryResponse> =>
@@ -27,7 +28,6 @@ const addUrl = async (urlOriginal: string): Promise<QueryResponse> =>
     }
     );
     const data: QueryResponse = await response.json();
-    console.log(data);
     return data;
 };
 

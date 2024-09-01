@@ -1,34 +1,50 @@
-.Main {
-    margin: auto;
+.addUrl {
+    max-width: 400px;
+    margin: 40px auto;
+    border: 3px solid var(--border-color);
+    border-radius: 100px;
+    background-color: var(--background-color-input);
+    padding: 3px;
 }
-
-.Main h1 {
-    text-align: center;
-    color: var(--text-color);
-}
-
 
 .addUrl form {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
 }
-.addUrl form input{
-   width: 50%;
+
+.addUrl form svg {
+    font-size: initial;
+    width: 5%;
+    color: var(--text-color);
+    margin: 5px;
 }
-.button {
-    padding: 10px;
-    border-radius: 5px;
+
+.addUrl form input[type="text"] {
+    border: none;
     background-color: transparent;
-    margin: 10px;
-    border: 1px solid #FFFFFF;
+    width: 65%;
+    padding: 15px 0;
+    box-sizing: border-box;
+}
+
+.addUrl form input[type="submit"] {
+    border: none;
+    border-radius: 100px;
+    background-color: var(--background-color-button);
+    width: 30%;
+    padding: 15px 0;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.input::placeholder {
     color: var(--text-color);
 }
 
-.input {
-    padding: 10px;
-    border-radius: 5px;
-    margin: 10px;
-    border: 1px solid #FFFFFF;
+@media (max-width: 1024px) {
+    .addUrl {
+        width: 80%;
+    }
 }

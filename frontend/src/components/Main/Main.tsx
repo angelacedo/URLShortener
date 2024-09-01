@@ -1,5 +1,7 @@
+import TopMenu from 'components/TopMenu/TopMenu';
 import URLList from 'components/URLList/URLList';
 import React, { FunctionComponent, useState } from 'react';
+import { IoMdLink } from "react-icons/io";
 import { Bounce, toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { addUrl, DataResponse, QueryResponse } from '../../api/data';
@@ -11,15 +13,16 @@ import './Main.css';
 const Main: FunctionComponent = () =>
 {
   const [newUrL, setNewUrl] = useState<DataResponse | undefined>(undefined);
-
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
   const addUrlForm = async (e: React.FormEvent<HTMLFormElement>) =>
   {
     e.preventDefault();
+    setIsButtonDisabled(true);
     const originalUrl: string = (e.currentTarget.elements[0] as HTMLInputElement).value;
     if (matchUrl(originalUrl))
     {
       const result: QueryResponse | null = await addUrl(originalUrl);
-      if (result && result.code == 200 && result.data)
+      if (result && result.code === 200 && result.data)
       {
         const newUrl: DataResponse = result.data[0];
         setNewUrl(newUrl);
@@ -30,20 +33,27 @@ const Main: FunctionComponent = () =>
     } else
       toast.error("The string provided is not an URL");
 
+    setIsButtonDisabled(false);
   };
 
 
   return (
     <div className="Main">
-      <h1>URL Shortener</h1>
-      <div className='addUrl'>
-        <form onSubmit={(e) => addUrlForm(e)}>
-          <input className='input' type="text" placeholder='http(s)://mywebsite.com/page' />
-          <input className='button' type="submit" value="Generate Short URL" />
-        </form>
+      <TopMenu/>
+      <div>
+        <h1>Shrink Those Streeeetched Out Links</h1>
+        <div>
+          <p>Linkify is a quick and user-friendly URL shortener that simplifies your online journey</p>
+          <div className='addUrl'>
+            <form onSubmit={(e) => addUrlForm(e)}>
+              <IoMdLink />
+              <input className='input' name='text' type="text" placeholder='Enter the URL to be shorted' />
+              <input className='button' type="submit" disabled={isButtonDisabled} value="Shorten URL" />
+            </form>
+          </div>
+        </div>
+        <URLList newUrl={newUrL} />
       </div>
-
-      <URLList newUrl={newUrL}/>
 
 
       <ToastContainer
@@ -57,6 +67,7 @@ const Main: FunctionComponent = () =>
         draggable={false}
         pauseOnHover
         theme="light"
+        className="toast"
         transition={Bounce} />
     </div>
   );

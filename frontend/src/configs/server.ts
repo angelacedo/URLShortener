@@ -1,8 +1,6 @@
 const config = {
-    clientUrl: "http://localhost:3001/",
-    serverUrl: "https://url-shortener-phi-three.vercel.app/api/"
-
+    serverUrl: "https://url-shortener-mocha-nine.vercel.app/api/"
 }
 
 
-export default  config
+export default config

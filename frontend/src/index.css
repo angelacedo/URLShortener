@@ -1,14 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+
 :root {
-  --background-color: #0F3057;
-  --text-color: #FFFFFF;
-  --background-color-table: #f0f8ff;
-  --delete-button-background: #fd4141;
+  --primary-color: #FF8225;
+  --secondary-color: #b43f3fb8;
+  --text-color: #F8EDED;
+  --background-color: #1b1c1c;
+  ;
+  --border-color: var(--secondary-color);
+  --title-color: linear-gradient(90deg, rgb(255, 111, 1, 1) 0%, rgba(180, 63, 63, 1) 50%, rgb(255, 111, 1, 1) 100%);
+  --background-color-input: var(--primary-color);
+  --background-color-button: rgba(248, 237, 237, 0.8);
+  --background-color-header-table: var(--primary-color);
+  --background-color-even-rows-table: var(--text-color);
+  --background-color-odd-rows-table: #a29f9fd7;
+  --shadow-color: rgba(105, 105, 105, 0.8);
+}
+
+h1 {
+  font-size: 1.5em;
+  text-align: center;
+  background: var(--title-color);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+p {
+  font-size: 0.7em;
+  text-align: center;
+  color: var(--text-color);
 }
 
 
+input,
+button {
+  font-size: 0.8rem;
+}
+
+button,
+select {
+  cursor: pointer;
+}
+
+
+svg {
+  font-size: 1rem;
+  margin-right: 5px;
+}
+
+td,
+th,
+td p {
+  font-size: 0.8rem;
+  text-decoration: none;
+  color: var(--text-color-table);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 body {
+  font-size: 25px;
+  font-family: Roboto, serif;
   margin: 0;
   padding: 0;
   background-color: var(--background-color);
-  font-family: Roboto, Helvetica Neue, sans-serif;
+}
+
+.toast {
+  font-size: 15px;
+}
+
+input:focus {
+  color: var(--text-color);
+  outline: none;
+}
+
+@media (max-width: 1248px) {
+  svg {
+    font-size: 16px;
+  }
+
+  td,
+  th,
+  td p {
+    font-size: 0.6rem;
+  }
+
+}
+
+@media (max-width: 1024px) {
+  svg {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 568px) {
+  svg {
+    font-size: 10px;
+  }
 }

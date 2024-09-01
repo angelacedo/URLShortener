@@ -1,51 +1,123 @@
-.table {
-    width: 100%;
-    max-width: 700px;
-    text-align: center;
-    background-color: var(--background-color-table);
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
+.tableContainer {
     margin: auto;
+    max-width: 700px;
 }
 
-.table thead th {
-    padding: 15px;
-    background-color: grey;
-    font-size: 14px;
+.tableContainer .table {
+    box-shadow: 4px 4px var(--shadow-color);
+    border-collapse: collapse;
+    width: 100%;
 }
 
-
-.table thead th:first-child {
-    border-top-left-radius: 20px;
+.tableContainer .table thead th {
+    padding: 15px 10px;
+    background-color: var(--background-color-header-table);
+    border-bottom: 1px solid black;
+    text-align: start;
 }
 
-.table thead th:last-child {
-    border-top-right-radius: 20px;
+.tableContainer .table tbody td {
+    padding: 10px;
+    background-color: var(--background-color-rows-table);
+    border-bottom: 1px solid black;
 }
 
-.table tbody tr:nth-child(even) {
-    background-color: rgb(219, 219, 219);
+.tableContainer .table tbody tr:last-child td {
+    border-bottom: none;
 }
 
-.table tr td {
-    padding: 15px;
-    max-width: 50px;
-    white-space: nowrap;
-    overflow: auto;
-}
-
-.table tr td button {
-    padding: 5px;
+.tableContainer .table tbody tr td div {
     display: flex;
-    justify-content: center;
-    background-color: var(--delete-button-background);
-    border-radius: 5px;
-    border-color: transparent;
-    margin: 5px auto;
+    align-items: center;
 }
 
-@media only screen and (max-width: 992px) {
-    .table thead th {
-        padding: 10px 0;
+.tableContainer .table tbody tr:nth-child(odd) td {
+    background-color: var(--background-color-odd-rows-table);
+}
+
+.tableContainer .table tbody tr:nth-child(even) td {
+    background-color: var(--background-color-even-rows-table);
+}
+
+.tableContainer .table tr td svg {
+    cursor: pointer;
+    font-size: 15px;
+}
+
+
+.tableContainer .controlButtons {
+    text-align: right;
+    margin: 10px 0;
+}
+
+.tableContainer .controlButtons button {
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    margin: 0 3px;
+    background-color: var(--primary-color);
+    border: 3px solid var(--border-color);
+}
+
+.tableContainer .controlButtons button:hover {
+    background-color: var(--background-color-button);
+}
+
+.tableContainer .controlButtons button svg {
+    margin: auto;
+    vertical-align: middle;
+    font-size: 10px;
+}
+
+.tableContainer div{
+    margin-bottom: 10px;
+}
+
+.tableContainer div select, .tableContainer div select option{
+    padding: 3px;
+    border-radius: 5px;
+    background-color: var(--primary-color);
+    border: 3px solid var(--border-color);
+}
+
+.tableContainer div select:hover, .tableContainer div select option:hover {
+    background-color: var(--background-color-button);
+}
+
+.tableContainer div select:focus{
+    outline: none;
+}
+
+
+
+.tableContainer div select option:checked {
+  background-color: transparent;
+  color: inherit;
+}
+
+
+@media (max-width: 1248px) {
+
+    .tableContainer .table thead th td,
+    .tableContainer .table tbody tr td {
+        max-width: 250px;
+        padding: 10px 5px;
+    }
+
+    .tableContainer .table tr td svg {
+        cursor: pointer;
+        font-size: 10px;
+    }
+}
+
+
+@media (max-width: 568px) {
+
+    .tableContainer .table {
+        box-shadow: none;
+    }
+
+    .tableContainer .table tbody tr td {
+        max-width: 100px;
     }
 }
