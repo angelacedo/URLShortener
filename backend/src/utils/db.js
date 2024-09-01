@@ -108,14 +108,9 @@ const increaseClickCount = async (shortUrl) =>
 
     } catch (e)
     {
-        response = {
-            code: e.message == "Short URL Not found" ? 404 : e.code,
-            errorMessage: "Error searching registry to database: " + e.message,
-            data: []
-        };
-
+       return 0;
     }
-    return response;
+    ;
 };
 
 
