@@ -25,18 +25,15 @@ const URLList: FC<URLListProps> = ({ newUrl }) =>
 
   useEffect(() =>
   {
-    const abortController = new AbortController();
     const fetchUrls = async () =>
     {
 
-      const response: QueryResponse = await getAllUrls(abortController);
+      const response: QueryResponse = await getAllUrls();
       if (response && response.code === 200)
         setUrls(response.data);
       setIsFetched(true);
     };
     fetchUrls();
-
-    return () => abortController.abort();
   }, []);
 
   useEffect(() => newUrl ? setUrls((prevUrls) => [...prevUrls, newUrl]) : () => { }, [newUrl]);

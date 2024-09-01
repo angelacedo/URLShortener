@@ -31,15 +31,14 @@ const addUrl = async (urlOriginal: string): Promise<QueryResponse> =>
     return data;
 };
 
-const getAllUrls = async (abortController: AbortController): Promise<QueryResponse> =>
+const getAllUrls = async (): Promise<QueryResponse> =>
 {
     const response = await fetch(config.serverUrl + "getAllUrls", {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
         },
-        mode: 'cors',
-        signal: abortController.signal
+        mode: 'cors'
     }
     );
 

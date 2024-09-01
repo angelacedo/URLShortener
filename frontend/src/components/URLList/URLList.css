@@ -79,9 +79,6 @@
     border: 3px solid var(--border-color);
 }
 
-.tableContainer div select:hover, .tableContainer div select option:hover {
-    background-color: var(--background-color-button);
-}
 
 .tableContainer div select:focus{
     outline: none;
