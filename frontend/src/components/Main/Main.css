@@ -48,3 +48,9 @@
         width: 80%;
     }
 }
+
+@media (max-width: 568px) {
+    .addUrl form input[type="submit"] {
+        font-size: 10px;
+    }
+}

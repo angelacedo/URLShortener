@@ -17,7 +17,7 @@
 }
 
 .tableContainer .table tbody td {
-    padding: 10px;
+    padding: 5px 10px;
     background-color: var(--background-color-rows-table);
     border-bottom: 1px solid black;
 }
@@ -44,7 +44,6 @@
     font-size: 15px;
 }
 
-
 .tableContainer .controlButtons {
     text-align: right;
     margin: 10px 0;
@@ -69,7 +68,7 @@
     font-size: 10px;
 }
 
-.tableContainer div{
+.tableContainer div select{
     margin-bottom: 10px;
 }
 
@@ -87,8 +86,6 @@
 .tableContainer div select:focus{
     outline: none;
 }
-
-
 
 .tableContainer div select option:checked {
   background-color: transparent;

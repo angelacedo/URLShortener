@@ -37,7 +37,7 @@ const URLList: FC<URLListProps> = ({ newUrl }) =>
     fetchUrls();
 
     return () => abortController.abort();
-  }, []);
+  });
 
   useEffect(() => newUrl ? setUrls((prevUrls) => [...prevUrls, newUrl]) : () => { }, [newUrl]);
 
