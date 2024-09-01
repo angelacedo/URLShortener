@@ -21,7 +21,7 @@ const URLList: FC<URLListProps> = ({ newUrl }) =>
   let [color] = useState("var(--primary-color)");
   const [lastPage, setLastPage] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
-  const ROWS_PER_PAGE = 3;
+  const ROWS_PER_PAGE = 5;
 
   useEffect(() =>
   {
@@ -37,7 +37,7 @@ const URLList: FC<URLListProps> = ({ newUrl }) =>
     fetchUrls();
 
     return () => abortController.abort();
-  });
+  }, []);
 
   useEffect(() => newUrl ? setUrls((prevUrls) => [...prevUrls, newUrl]) : () => { }, [newUrl]);
 

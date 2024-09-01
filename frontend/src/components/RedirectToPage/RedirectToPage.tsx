@@ -26,7 +26,7 @@ const RedirectToPage = () =>
 
     };
     getOriginalURL();
-  });
+  }, []);
   return (
     <div>
       <p>Loading...</p>
