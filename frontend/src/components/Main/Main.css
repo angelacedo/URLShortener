@@ -2,7 +2,7 @@
     max-width: 400px;
     margin: 40px auto;
     border: 1px solid var(--border-color);
-    border-radius: 100px;
+    border-radius: 10px;
     background-color: var(--background-color-input);
     padding: 3px;
 }
@@ -31,7 +31,7 @@
 
 .addUrl form input[type="submit"] {
     border: none;
-    border-radius: 100px;
+    border-radius: 10px;
     background-color: var(--background-color-button);
     width: 30%;
     padding: 15px 0;
