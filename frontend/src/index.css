@@ -3,16 +3,16 @@
 :root {
   --primary-color: #FF8225;
   --secondary-color: #b43f3fb8;
-  --text-color: #F8EDED;
-  --background-color: #1b1c1c;
+  --text-color: #0A0A0A;
+  --background-color: #e7f0ff;
   ;
   --border-color: var(--secondary-color);
   --title-color: linear-gradient(90deg, rgb(255, 111, 1, 1) 0%, rgba(180, 63, 63, 1) 50%, rgb(255, 111, 1, 1) 100%);
-  --background-color-input: var(--primary-color);
-  --background-color-button: rgba(248, 237, 237, 0.8);
+  --background-color-input: #ecebeb;
+  --background-color-button: #ffcca5;
   --background-color-header-table: var(--primary-color);
-  --background-color-even-rows-table: var(--text-color);
-  --background-color-odd-rows-table: #a29f9fd7;
+  --background-color-even-rows-table: var(--background-color-button);
+  --background-color-odd-rows-table: var(--background-color);
   --shadow-color: rgba(105, 105, 105, 0.8);
 }
 

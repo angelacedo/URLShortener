@@ -1,7 +1,7 @@
 .addUrl {
     max-width: 400px;
     margin: 40px auto;
-    border: 3px solid var(--border-color);
+    border: 1px solid var(--border-color);
     border-radius: 100px;
     background-color: var(--background-color-input);
     padding: 3px;
@@ -37,6 +37,12 @@
     padding: 15px 0;
     cursor: pointer;
     font-weight: bold;
+}
+
+.addUrl form input[type="submit"]:hover {
+    background-color: var(--primary-color);
+    color: #FAFAFA;
+    transition: 0.4s;
 }
 
 .input::placeholder {
