@@ -9,7 +9,6 @@
 
 .addUrl form {
     display: flex;
-    flex-direction: row;
     justify-content: center;
     align-items: center;
 }
@@ -17,8 +16,8 @@
 .addUrl form svg {
     font-size: initial;
     width: 5%;
-    color: var(--text-color);
-    margin: 5px;
+    color: var(--primary-color);
+    margin: 0 5px;
 }
 
 .addUrl form input[type="text"] {

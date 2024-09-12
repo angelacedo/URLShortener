@@ -8,7 +8,7 @@
   ;
   --border-color: var(--secondary-color);
   --title-color: linear-gradient(90deg, rgb(255, 111, 1, 1) 0%, rgba(180, 63, 63, 1) 50%, rgb(255, 111, 1, 1) 100%);
-  --background-color-input: #ecebeb;
+  --background-color-input: unset;
   --background-color-button: #ffcca5;
   --background-color-header-table: var(--primary-color);
   --background-color-even-rows-table: var(--background-color-button);

@@ -4,6 +4,32 @@
 
 }
 
+
+.tableContainer>div:first-child {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    background-color: var(--background-color-input);
+    padding: 10px;
+    max-width: 40%;
+    margin-bottom: 10px;
+}
+
+.tableContainer>div:first-child svg {
+    width: 5%;
+    color: var(--primary-color);
+}
+
+.tableContainer>div:first-child input {
+    height: 100%;
+    width: 95%;
+    border: none;
+    background-color: transparent;
+
+}
+
 .tableContainer .table {
     box-shadow: 4px 4px var(--shadow-color);
     border-collapse: collapse;
@@ -51,6 +77,12 @@
     margin: 10px 0;
 }
 
+.tableContainer .controlButtons {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
+
 .tableContainer .controlButtons button {
     border-radius: 50%;
     width: 30px;
@@ -64,38 +96,12 @@
     background-color: var(--background-color-button);
 }
 
-.tableContainer .controlButtons button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-}
-
 .tableContainer .controlButtons button svg {
     margin: auto;
     font-size: 10px;
 }
 
-.tableContainer div select {
-    margin-bottom: 10px;
-}
 
-.tableContainer div select,
-.tableContainer div select option {
-    padding: 3px;
-    border-radius: 5px;
-    background-color: var(--primary-color);
-    border: 3px solid var(--border-color);
-}
-
-
-.tableContainer div select:focus {
-    outline: none;
-}
-
-.tableContainer div select option:checked {
-    background-color: transparent;
-    color: inherit;
-}
 
 
 @media (max-width: 1248px) {

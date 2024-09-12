@@ -1,4 +1,4 @@
-import { flexRender, getCoreRowModel, Table, useReactTable } from '@tanstack/react-table';
+import { flexRender, getCoreRowModel, getFilteredRowModel, getPaginationRowModel, Table, useReactTable } from '@tanstack/react-table';
 import React, { FC, useEffect, useMemo, useState } from 'react';
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { ClipLoader } from 'react-spinners';
@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { DataResponse, getAllUrls, QueryResponse } from '../../api/data';
 
-import { IoCopy, IoCopyOutline } from 'react-icons/io5';
+import { IoCopy, IoCopyOutline, IoSearch } from 'react-icons/io5';
 import './URLList.css';
 interface URLListProps
 {
@@ -19,9 +19,8 @@ const URLList: FC<URLListProps> = ({ newUrl }) =>
   const [isFetched, setIsFetched] = useState(false);
   const [isIconClicked, setIconClicked] = useState<number | null>(null);
   let [color] = useState("var(--primary-color)");
-  const [lastPage, setLastPage] = useState(1);
-  const [currentPage, setCurrentPage] = useState(1);
-  const ROWS_PER_PAGE = 5;
+  const [globalFilter, setGlobalFilter] = useState('');
+  const [pagination, setPagination] = useState({ pageIndex: 0, pageSize: 5 });
 
   useEffect(() =>
   {
@@ -37,29 +36,6 @@ const URLList: FC<URLListProps> = ({ newUrl }) =>
   }, []);
 
   useEffect(() => newUrl ? setUrls((prevUrls) => [...prevUrls, newUrl]) : () => { }, [newUrl]);
-
-  useEffect(() => setLastPage(Math.ceil(urls.length / ROWS_PER_PAGE)), [urls]);
-
-  /* const onDelete = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) =>
-  {
-    e.preventDefault();
-    const shortURL: string | null = (e.currentTarget.parentElement?.parentElement?.children[2].querySelector('a') as HTMLAnchorElement).href;
-    console.log(shortURL);
-    const index: number | null = Number((e.currentTarget.parentElement?.parentElement?.children[0] as HTMLButtonElement).textContent);
-    if (shortURL && index)
-    {
-      const result: QueryResponse = await deleteUrl(shortURL);
-      if (result && result.code === 200 && (result.data[0] as DataResponse).deletedCount > 0)
-      {
-        setUrls(prevUrls => prevUrls.filter(url => url.shortURL !== shortURL));
-        toast.success("HeaderCelle URL " + shortURL + " has been deleted successfully");
-      } else
-      {
-        toast.error("Error deleting " + shortURL);
-      }
-    }
-
-  }; */
 
   const onCopy = (index: number, url: string) =>
   {
@@ -78,74 +54,77 @@ const URLList: FC<URLListProps> = ({ newUrl }) =>
   const columns = useMemo(
     () => [
       {
-        accessorFn: (row: { shortURL: string; }, index: number) => ({ shortURL: row.shortURL, index }),
-        id: "post.shortURL",
+        accessorFn: (row: { shortURL: string; }) => row.shortURL,
+        id: "shortURL",
         header: "ShortURL",
-        cell: (info: { getValue: () => { shortURL: string, index: number; }; }) =>
+        cell: (info: { row: { index: number; }; getValue: () => string; }) =>
         {
+          const shortURL = info.getValue();
+          const index = info.row.index;
 
           return (
             <div>
-              {isIconClicked === info.getValue().index ? <IoCopy /> : <IoCopyOutline onClick={() => onCopy(info.getValue().index, info.getValue().shortURL)} />}
-              <p>{info.getValue().shortURL}</p>
+              {isIconClicked === index ? (
+                <IoCopy />
+              ) : (
+                <IoCopyOutline onClick={() => onCopy(index, shortURL)} />
+              )}
+              <p>{shortURL}</p>
             </div>
           );
-        }
+        },
       },
       {
         accessorFn: (row: { originalURL: string; }) => row.originalURL,
-        id: "post.originalURL",
+        id: "originalURL",
         header: "OriginalURL",
-        cell: (info: { getValue: () => string; }) => info.getValue(),
+        cell: (info: { getValue: () => string; }) => info.getValue()
       },
       {
         accessorFn: (row: { clickCount: number; }) => row.clickCount,
-        id: "post.clickCount",
+        id: "clickCount",
         header: "Count",
-        cell: (info: { getValue: () => number; }) => info.getValue(),
+        cell: (info: { getValue: () => number; }) => info.getValue()
       },
       {
         accessorFn: (row: { date: Date; }) => new Date(row.date).toLocaleDateString() + " " + new Date(row.date).toLocaleTimeString(),
-        id: "post.date",
+        id: "date",
         header: "Creation Date",
-        cell: (info: { getValue: () => any; }) => info.getValue(),
+        cell: (info: { getValue: () => any; }) => info.getValue()
       },
     ],
     [isIconClicked],
   );
 
   const data: DataResponse[] = useMemo<DataResponse[]>(
-    () => urls.slice((currentPage - 1) * ROWS_PER_PAGE, ((currentPage - 1) * ROWS_PER_PAGE) + ROWS_PER_PAGE), [urls, currentPage]
+    () => urls, [urls]
   );
 
   const table: Table<DataResponse> = useReactTable<DataResponse>({
     data,
     columns,
-    manualPagination: true,
+    state: {
+      globalFilter,
+      pagination
+    },
+    onPaginationChange: setPagination,
     getCoreRowModel: getCoreRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
   });
-
   return (
     <div className='tableContainer'>
       <div>
-        <select
-          name="page-number"
-          onChange={(e: React.ChangeEvent<HTMLSelectElement>) => { setCurrentPage(Number(e.target.value)); }}
-          value={currentPage}>
-          {data.length > 0 ? (() =>
-          {
-            const pages: JSX.Element[] = [];
-            let i: number = 1;
-            while (i <= lastPage)
-            {
-              pages.push(<option key={`page-${i}`}>{i}</option>);
-              i++;
-            }
-            return pages;
-
-          })() : (() => { return <option key="page-0">1</option>; })()}
-        </select>
+        <IoSearch />
+        <input
+          value={globalFilter}
+          onChange={(e) => setGlobalFilter(e.target.value.toLocaleLowerCase())}
+          placeholder="Buscar..."
+          className='searchRows'
+        />
       </div>
+
+
       <table className='table'>
         <thead>
           {table.getHeaderGroups().map(headerGroup => (
@@ -205,8 +184,37 @@ const URLList: FC<URLListProps> = ({ newUrl }) =>
         </tbody>
       </table>
       <div className="controlButtons">
-        <button type="button" onClick={() => setCurrentPage(currentPage > 1 ? currentPage - 1 : currentPage)}><FaArrowLeft /></button>
-        <button type="button" onClick={() => setCurrentPage(currentPage < lastPage ? currentPage + 1 : currentPage)}> <FaArrowRight /></button>
+        <button type="button" disabled={!table.getCanPreviousPage()} onClick={() => table.previousPage()} ><FaArrowLeft /></button>
+        {data.length > 0 ? (() =>
+        {
+          console.log(table.getState().pagination.pageIndex)
+          const pages: JSX.Element[] = [];
+          const pagesButtonsToShow = [0, 1, table.getPageCount() - 2, table.getPageCount() - 1];
+          if (table.getPageCount() > 4)
+          {
+            pages.push(<button type="button" onClick={() => table.setPageIndex(0)} style={{ backgroundColor: table.getState().pagination.pageIndex === 0 ? 'var(--background-color-button)' : 'var(--primary-color)' }}>{1}</button>);
+
+            pages.push(<button type="button" onClick={() => table.setPageIndex(1)} style={{ backgroundColor: table.getState().pagination.pageIndex === 1 ? 'var(--background-color-button)' : 'var(--primary-color)' }}>{2}</button>);
+            if (!pagesButtonsToShow.includes(table.getState().pagination.pageIndex))
+            {
+              pages.push(<button type="button" onClick={() => table.setPageIndex(table.getState().pagination.pageIndex)} style={{ backgroundColor: 'var(--background-color-button)' }}>{table.getState().pagination.pageIndex + 1}</button>);
+            }
+            pages.push(<p>...</p>);
+
+            pages.push(<button type="button" onClick={() => table.setPageIndex(table.getPageCount() - 2)} style={{ backgroundColor: table.getState().pagination.pageIndex === table.getPageCount() - 2 ? 'var(--background-color-button)' : 'var(--primary-color)' }}>{table.getPageCount() - 1}</button>);
+
+            pages.push(<button type="button" onClick={() => table.setPageIndex(table.getPageCount() - 1)} style={{ backgroundColor: table.getState().pagination.pageIndex === table.getPageCount() - 1 ? 'var(--background-color-button)' : 'var(--primary-color)' }}>{table.getPageCount()}</button>);
+          } else
+          {
+            for (let i = 0; i < table.getPageCount(); i++)
+            {
+              pages.push(<button type="button" onClick={() => table.setPageIndex(i)} style={{ backgroundColor: table.getState().pagination.pageIndex === i ? 'var(--background-color-button)' : 'var(--primary-color)' }}>{i + 1}</button>);
+            }
+          }
+          return pages;
+        })() : (() => { return []; })()
+        }
+        <button type="button" onClick={() => table.nextPage()} disabled={!table.getCanNextPage()}> <FaArrowRight /></button>
       </div>
     </div >
 

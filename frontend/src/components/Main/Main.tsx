@@ -18,7 +18,7 @@ const Main: FunctionComponent = () =>
   {
     e.preventDefault();
     setIsButtonDisabled(true);
-    const originalUrl: string = (e.currentTarget.elements[0] as HTMLInputElement).value;
+    const originalUrl: string = (e.currentTarget.elements[0] as HTMLInputElement).value.trim().toLowerCase();
     if (matchUrl(originalUrl))
     {
       const result: QueryResponse | null = await addUrl(originalUrl);
