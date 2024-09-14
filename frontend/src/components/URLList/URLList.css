@@ -50,6 +50,10 @@
     border-bottom: 1px solid black;
 }
 
+.tableContainer .table tbody td:nth-child(2){
+    max-width: 150px;
+}
+
 .tableContainer .table tbody tr:last-child td {
     border-bottom: none;
 }

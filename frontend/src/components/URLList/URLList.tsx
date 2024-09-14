@@ -110,7 +110,7 @@ const URLList: FC<URLListProps> = ({ newUrl }) =>
     onPaginationChange: setPagination,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
-    getFilteredRowModel: getFilteredRowModel(),
+    getFilteredRowModel: getFilteredRowModel()
   });
   return (
     <div className='tableContainer'>
